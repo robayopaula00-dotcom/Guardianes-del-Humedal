@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no"/>
+  <meta name="apple-mobile-web-app-capable" content="yes"/>
+  <meta name="mobile-web-app-capable" content="yes"/>
+  <title>Guardianes del Humedal</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+  <div id="pantalla-inicio" class="pantalla activa">
+    <div class="inicio-contenido">
+      <h1>🌿 Guardianes del Humedal</h1>
+      <h2>Santa María del Lago</h2>
+      <div class="instrucciones">
+        <p>📱 Celular: botones en pantalla</p>
+        <p>💻 PC: flechas + espacio para saltar</p>
+        <p>💥 Al chocar responde la pregunta</p>
+        <p>❤️ 3 vidas — llega a 200 puntos</p>
+      </div>
+      <button id="btn-iniciar">¡Comenzar!</button>
+    </div>
+  </div>
+
+  <div id="pantalla-juego" class="pantalla">
+    <div id="hud">
+      <div id="vidas">❤️ ❤️ ❤️</div>
+      <div id="puntos">Puntos: 0</div>
+    </div>
+    <canvas id="canvas"></canvas>
+    <div id="mensaje-enemigo"></div>
+
+    <div id="panel-pregunta" class="oculto">
+      <p id="texto-pregunta"></p>
+      <div class="botones-pregunta">
+        <button id="btn-si">✅ Sí</button>
+        <button id="btn-no">❌ No</button>
+      </div>
+    </div>
+
+    <div id="controles-movil">
+      <button id="btn-izq"    class="btn-movil">◀</button>
+      <button id="btn-saltar" class="btn-movil btn-jump">▲</button>
+      <button id="btn-der"    class="btn-movil">▶</button>
+    </div>
+  </div>
+
+  <div id="pantalla-victoria" class="pantalla">
+    <div class="fin-contenido">
+      <h1>🎉 ¡Ganaste!</h1>
+      <p class="dato">🐦 El Humedal alberga más de 80 especies de aves, incluyendo la Tingua Bogotana, en peligro de extinción.</p>
+      <button id="btn-reiniciar-victoria">Jugar de nuevo</button>
+    </div>
+  </div>
+
+  <div id="pantalla-derrota" class="pantalla">
+    <div class="fin-contenido">
+      <h1>💀 ¡Perdiste!</h1>
+      <p class="dato">💧 El oxígeno disuelto bajo 4 mg/L impide la vida acuática en el humedal.</p>
+      <button id="btn-reiniciar-derrota">Intentar de nuevo</button>
+    </div>
+  </div>
+
+  <script src="game.js"></script>
+</body>
+</html>
