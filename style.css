@@ -1,0 +1,206 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: #0a1a0f;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  overflow: hidden;
+  width: 100vw;
+  height: 100vh;
+}
+
+/* PANTALLAS */
+.pantalla {
+  display: none;
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  top: 0; left: 0;
+}
+.pantalla.activa {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* INICIO */
+#pantalla-inicio {
+  background: linear-gradient(160deg, #0d2b1a 0%, #1a4a2e 50%, #0a3d1f 100%);
+  flex-direction: column;
+}
+.inicio-contenido {
+  text-align: center;
+  color: #fff;
+  padding: 40px;
+  background: rgba(0,0,0,0.45);
+  border-radius: 20px;
+  border: 2px solid #4caf50;
+  max-width: 480px;
+}
+.inicio-contenido h1 {
+  font-size: 2.4rem;
+  color: #7dff7d;
+  text-shadow: 0 0 20px #00ff44;
+  margin-bottom: 6px;
+}
+.inicio-contenido h2 {
+  font-size: 1.1rem;
+  color: #a5d6a7;
+  margin-bottom: 24px;
+  letter-spacing: 1px;
+}
+.instrucciones {
+  background: rgba(255,255,255,0.07);
+  border-radius: 10px;
+  padding: 16px 20px;
+  margin-bottom: 24px;
+}
+.instrucciones p {
+  margin: 8px 0;
+  font-size: 0.95rem;
+  color: #c8e6c9;
+}
+
+/* JUEGO */
+#pantalla-juego {
+  background: #000;
+  flex-direction: column;
+  display: none;
+}
+#pantalla-juego.activa {
+  display: flex;
+}
+#hud {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background: rgba(0,0,0,0.6);
+  z-index: 10;
+}
+#vidas {
+  font-size: 1.5rem;
+  letter-spacing: 4px;
+}
+#puntos {
+  font-size: 1.3rem;
+  color: #7dff7d;
+  font-weight: bold;
+}
+#canvas {
+  width: 100vw;
+  height: 100vh;
+  display: block;
+}
+#mensaje-enemigo {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0,0,0,0.7);
+  color: #fff;
+  padding: 8px 20px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  pointer-events: none;
+  transition: opacity 0.5s;
+  z-index: 10;
+}
+
+/* PANEL PREGUNTA */
+#panel-pregunta {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(10, 30, 15, 0.95);
+  border: 2px solid #4caf50;
+  border-radius: 16px;
+  padding: 28px 36px;
+  text-align: center;
+  z-index: 20;
+  max-width: 420px;
+  width: 90%;
+  box-shadow: 0 0 30px rgba(0,200,60,0.3);
+}
+#panel-pregunta p {
+  color: #e8f5e9;
+  font-size: 1.15rem;
+  margin-bottom: 20px;
+  line-height: 1.5;
+}
+.botones-pregunta {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+}
+.botones-pregunta button {
+  padding: 12px 32px;
+  font-size: 1.1rem;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: transform 0.1s, box-shadow 0.1s;
+}
+#btn-si {
+  background: #2e7d32;
+  color: #fff;
+}
+#btn-si:hover { background: #388e3c; transform: scale(1.05); }
+#btn-no {
+  background: #c62828;
+  color: #fff;
+}
+#btn-no:hover { background: #e53935; transform: scale(1.05); }
+.oculto { display: none !important; }
+
+/* BOTONES GENERALES */
+button {
+  padding: 14px 40px;
+  font-size: 1.1rem;
+  background: #2e7d32;
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: bold;
+  letter-spacing: 1px;
+  transition: background 0.2s, transform 0.1s;
+}
+button:hover {
+  background: #388e3c;
+  transform: scale(1.04);
+}
+
+/* PANTALLAS FINALES */
+#pantalla-victoria {
+  background: linear-gradient(135deg, #1b5e20 0%, #2e7d32 100%);
+}
+#pantalla-derrota {
+  background: linear-gradient(135deg, #1a0000 0%, #4a0000 100%);
+}
+.fin-contenido {
+  text-align: center;
+  color: #fff;
+  padding: 40px;
+  background: rgba(0,0,0,0.5);
+  border-radius: 20px;
+  max-width: 500px;
+}
+.fin-contenido h1 {
+  font-size: 2.8rem;
+  margin-bottom: 20px;
+}
+.dato {
+  font-size: 1rem;
+  color: #c8e6c9;
+  margin-bottom: 28px;
+  line-height: 1.6;
+  font-style: italic;
+}
