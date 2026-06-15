@@ -1,0 +1,196 @@
+* {
+  margin: 0; padding: 0;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html, body {
+  width: 100%; height: 100%;
+  overflow: hidden;
+  position: fixed;
+  background: #0a1a0f;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  touch-action: none;
+}
+
+/* ── PANTALLAS ── */
+.pantalla {
+  display: none;
+  width: 100%; height: 100%;
+  position: absolute; top: 0; left: 0;
+}
+.pantalla.activa { display: flex; align-items: center; justify-content: center; }
+
+/* ── INICIO ── */
+#pantalla-inicio { background: linear-gradient(160deg,#0d2b1a,#1a4a2e,#0a3d1f); }
+.inicio-contenido {
+  text-align: center; color: #fff;
+  padding: clamp(16px,4vw,32px) clamp(18px,5vw,28px);
+  background: rgba(0,0,0,0.5);
+  border-radius: 20px;
+  border: 2px solid #4caf50;
+  max-width: 420px; width: 88%;
+  max-height: 95vh;
+  overflow-y: auto;
+}
+.inicio-contenido h1 {
+  font-size: clamp(1.2rem,4.5vw,2.2rem);
+  color:#7dff7d; text-shadow:0 0 20px #00ff44; margin-bottom:4px;
+}
+.inicio-contenido h2 {
+  font-size: clamp(0.75rem,2.5vw,1rem);
+  color:#a5d6a7; margin-bottom:14px;
+}
+.instrucciones {
+  background:rgba(255,255,255,0.07); border-radius:10px;
+  padding: clamp(8px,2vw,14px) clamp(10px,2.5vw,18px);
+  margin-bottom: clamp(12px,3vw,20px);
+}
+.instrucciones p {
+  margin:5px 0;
+  font-size: clamp(0.7rem,2.2vw,0.88rem);
+  color:#c8e6c9;
+}
+
+/* ── JUEGO ── */
+#pantalla-juego { background:#000; flex-direction:column; }
+#pantalla-juego.activa { display:flex; }
+
+#hud {
+  position:absolute; top:0; left:0; right:0;
+  display:flex; justify-content:space-between; align-items:center;
+  padding: clamp(5px,1.5vw,8px) clamp(10px,3vw,16px);
+  background:rgba(0,0,0,0.6);
+  z-index:10;
+  height: clamp(38px,6vh,50px);
+}
+#vidas  { font-size:clamp(0.85rem,3vw,1.4rem); letter-spacing:2px; }
+#puntos { font-size:clamp(0.8rem,2.8vw,1.2rem); color:#7dff7d; font-weight:bold; }
+
+#canvas { width:100%; height:100%; display:block; }
+
+#mensaje-enemigo {
+  position:absolute;
+  /* Se mueve según orientación */
+  bottom: clamp(90px,14vh,120px);
+  left:50%; transform:translateX(-50%);
+  background:rgba(0,0,0,0.78); color:#fff;
+  padding:7px 16px; border-radius:20px;
+  font-size:clamp(0.68rem,2vw,0.88rem);
+  pointer-events:none; opacity:0;
+  transition:opacity 0.4s; z-index:10;
+  text-align:center; max-width:88%;
+  white-space: normal;
+}
+
+/* ── PANEL PREGUNTA ── */
+#panel-pregunta {
+  position:absolute; top:50%; left:50%;
+  transform:translate(-50%,-50%);
+  background:rgba(10,30,15,0.97);
+  border:2px solid #4caf50; border-radius:16px;
+  padding: clamp(16px,3vw,24px) clamp(18px,4vw,28px);
+  text-align:center; z-index:20;
+  width:88%; max-width:400px;
+  box-shadow:0 0 30px rgba(0,200,60,0.3);
+}
+#panel-pregunta p {
+  color:#e8f5e9;
+  font-size:clamp(0.82rem,2.8vw,1.05rem);
+  margin-bottom:14px; line-height:1.5;
+}
+.botones-pregunta { display:flex; gap:12px; justify-content:center; }
+.botones-pregunta button {
+  padding: clamp(10px,2vw,12px) clamp(20px,4vw,28px);
+  font-size:clamp(0.88rem,2.8vw,1.05rem);
+  border:none; border-radius:10px; cursor:pointer; font-weight:bold; min-width:80px;
+}
+#btn-si { background:#2e7d32; color:#fff; }
+#btn-si:active { background:#388e3c; }
+#btn-no { background:#c62828; color:#fff; }
+#btn-no:active { background:#e53935; }
+.oculto { display:none !important; }
+
+/* ── CONTROLES MÓVIL ── */
+#controles-movil {
+  position:absolute;
+  bottom:0; left:0; right:0;
+  height: clamp(80px,12vh,100px);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding: 0 clamp(14px,4vw,24px) clamp(6px,1.5vh,12px);
+  z-index:15;
+  background: linear-gradient(to top, rgba(0,0,0,0.5), transparent);
+  pointer-events:none;
+}
+.btn-movil {
+  pointer-events:all;
+  width:  clamp(58px,10vw,78px);
+  height: clamp(58px,10vw,78px);
+  font-size: clamp(1.3rem,3.5vw,1.8rem);
+  background:rgba(0,0,0,0.5);
+  color:#fff;
+  border:2.5px solid rgba(255,255,255,0.4);
+  border-radius:50%;
+  cursor:pointer;
+  touch-action:manipulation;
+  user-select:none; -webkit-user-select:none;
+  display:flex; align-items:center; justify-content:center;
+  -webkit-touch-callout:none;
+}
+.btn-movil:active, .btn-movil.on {
+  background:rgba(76,175,80,0.65);
+  transform:scale(0.9);
+  border-color:#7dff7d;
+}
+.btn-jump {
+  width:  clamp(68px,12vw,88px);
+  height: clamp(68px,12vw,88px);
+  font-size: clamp(1.5rem,4vw,2rem);
+  background:rgba(20,80,40,0.6);
+  border-color:rgba(100,255,120,0.55);
+}
+
+/* ── ORIENTACIÓN HORIZONTAL en móvil ── */
+@media screen and (max-height: 450px) {
+  .inicio-contenido h1 { font-size: 1.1rem; margin-bottom: 2px; }
+  .inicio-contenido h2 { font-size: 0.7rem; margin-bottom: 8px; }
+  .instrucciones       { padding: 6px 10px; margin-bottom: 10px; }
+  .instrucciones p     { margin: 3px 0; font-size: 0.68rem; }
+
+  #hud { height: 34px; padding: 4px 12px; }
+  #vidas  { font-size: 0.8rem; }
+  #puntos { font-size: 0.8rem; }
+
+  #controles-movil { height: 70px; }
+  .btn-movil  { width: 52px; height: 52px; font-size: 1.2rem; }
+  .btn-jump   { width: 60px; height: 60px; font-size: 1.4rem; }
+
+  #mensaje-enemigo { bottom: 76px; font-size: 0.65rem; }
+}
+
+/* ── BOTÓN GENERAL ── */
+button {
+  padding: clamp(10px,2.5vw,13px) clamp(24px,5vw,36px);
+  font-size: clamp(0.88rem,2.8vw,1.05rem);
+  background:#2e7d32; color:#fff; border:none;
+  border-radius:12px; cursor:pointer; font-weight:bold; letter-spacing:1px;
+}
+button:active { background:#388e3c; transform:scale(0.97); }
+
+/* ── FINALES ── */
+#pantalla-victoria { background:linear-gradient(135deg,#1b5e20,#2e7d32); }
+#pantalla-derrota  { background:linear-gradient(135deg,#1a0000,#4a0000); }
+.fin-contenido {
+  text-align:center; color:#fff;
+  padding: clamp(20px,4vw,36px) clamp(18px,4vw,28px);
+  background:rgba(0,0,0,0.5); border-radius:20px;
+  max-width:460px; width:88%;
+  max-height:95vh; overflow-y:auto;
+}
+.fin-contenido h1 { font-size:clamp(1.5rem,5vw,2.6rem); margin-bottom:14px; }
+.dato {
+  font-size:clamp(0.75rem,2.5vw,0.95rem);
+  color:#c8e6c9; margin-bottom:20px; line-height:1.6; font-style:italic;
+}
