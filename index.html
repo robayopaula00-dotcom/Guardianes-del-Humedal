@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no"/>
+  <meta name="apple-mobile-web-app-capable" content="yes"/>
+  <meta name="mobile-web-app-capable" content="yes"/>
+  <title>Guardianes del Humedal</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+  <!-- Sugerencia de rotar en portrait mobile -->
+  <div id="girar-pantalla">
+    <div class="icono-rotar">📱</div>
+    <p><strong>¡Gira tu dispositivo!</strong></p>
+    <p>El juego se ve mejor en horizontal</p>
+    <small>Para una mejor experiencia usa el modo paisaje</small>
+    <button id="btn-ignorar-rotar">Continuar de todas formas</button>
+  </div>
+
+  <!-- ── PANTALLA INICIO ── -->
+  <div id="pantalla-inicio" class="pantalla activa">
+    <div class="inicio-contenido">
+
+      <!-- Logos institucionales -->
+      <div class="inicio-logos">
+        <img src="logo_bogota.png"   class="logo-inst" alt="Bogotá">
+        <img src="logo_eafit.png"    class="logo-inst" id="logo-eafit-inicio" alt="Universidad EAFIT">
+        <img src="logo_cpciencia.png" class="logo-inst" alt="Comunicación Pública de la Ciencia">
+      </div>
+
+      <h1>🌿 Guardianes del Humedal</h1>
+      <p class="inicio-produccion">
+        Una producción de las y los estudiantes del curso 1101 y 1001 del Colegio Garcés Navas,
+        en el marco de la estrategia de <strong>Comunicación Pública de la Ciencia</strong>
+        de la Secretaría de Educación de Bogotá y la Universidad EAFIT.
+      </p>
+
+      <div class="instrucciones">
+        <p>📱 Celular: usa los botones en pantalla</p>
+        <p>💻 PC: flechas + espacio para saltar</p>
+        <p>👟 Salta ENCIMA del enemigo para aplastarlo</p>
+        <p>💧 Recoge gotas de agua para ganar puntos</p>
+        <p>💥 Al chocar de lado, responde la pregunta</p>
+        <p>❤️ 3 vidas — ¡llega a 350 puntos para ganar!</p>
+      </div>
+      <button id="btn-iniciar">¡Comenzar!</button>
+    </div>
+  </div>
+
+  <!-- ── PANTALLA JUEGO ── -->
+  <div id="pantalla-juego" class="pantalla">
+
+    <!-- Barra superior con logos e info institucional -->
+    <div id="logo-bar">
+      <img src="logo_bogota.png"    class="logo-barra" alt="Bogotá">
+      <img src="logo_eafit.png"     class="logo-barra" id="logo-eafit" alt="Universidad EAFIT">
+      <div id="colegio-info">
+        <div id="nombre-juego">🌿 Guardianes del Humedal</div>
+        <div id="nombre-colegio">Estudiantes 1101 &amp; 1001 · Colegio Garcés Navas · CPC Secretaría de Educación &amp; U. EAFIT</div>
+      </div>
+      <img src="logo_cpciencia.png" class="logo-barra" alt="Comunicación Pública de la Ciencia">
+    </div>
+
+    <!-- Ticker con texto de producción -->
+    <div id="ticker">
+      <div id="ticker-text">
+        🌿 Guardianes del Humedal &nbsp;·&nbsp; Una producción de las y los estudiantes del curso 1101 y 1001 del Colegio Garcés Navas, en el marco de la estrategia de Comunicación Pública de la Ciencia de la Secretaría de Educación de Bogotá y la Universidad EAFIT. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </div>
+    </div>
+
+    <div id="hud">
+      <div id="vidas">❤️ ❤️ ❤️</div>
+      <div id="puntos">Puntos: 0</div>
+    </div>
+
+    <canvas id="canvas"></canvas>
+    <div id="mensaje-enemigo"></div>
+
+    <div id="panel-pregunta" class="oculto">
+      <p id="texto-pregunta"></p>
+      <div class="botones-pregunta">
+        <button id="btn-op0" class="btn-opcion">A</button>
+        <button id="btn-op1" class="btn-opcion">B</button>
+        <button id="btn-op2" class="btn-opcion">C</button>
+        <button id="btn-op3" class="btn-opcion">D</button>
+      </div>
+    </div>
+
+    <div id="controles-movil">
+      <button id="btn-izq"    class="btn-movil">◀</button>
+      <button id="btn-saltar" class="btn-movil btn-jump">▲</button>
+      <button id="btn-der"    class="btn-movil">▶</button>
+    </div>
+  </div>
+
+  <!-- ── PANTALLA VICTORIA ── -->
+  <div id="pantalla-victoria" class="pantalla">
+    <div class="fin-contenido">
+      <h1>🎉 ¡Ganaste!</h1>
+      <p class="dato">🐦 El humedal alberga más de 80 especies de aves, incluyendo la Tingua Bogotana, en peligro de extinción.</p>
+      <button id="btn-reiniciar-victoria">Jugar de nuevo</button>
+    </div>
+  </div>
+
+  <!-- ── PANTALLA DERROTA ── -->
+  <div id="pantalla-derrota" class="pantalla">
+    <div class="fin-contenido">
+      <h1>💀 ¡Perdiste!</h1>
+      <p class="dato">💧 El oxígeno disuelto por debajo de 4 mg/L impide la vida acuática en el humedal.</p>
+      <button id="btn-reiniciar-derrota">Intentar de nuevo</button>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('btn-ignorar-rotar').addEventListener('click', function(){
+      document.getElementById('girar-pantalla').style.display = 'none';
+    });
+  </script>
+  <script src="game.js"></script>
+</body>
+</html>

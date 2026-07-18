@@ -1,0 +1,403 @@
+* {
+  margin: 0; padding: 0;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html, body {
+  width: 100%; height: 100%;
+  overflow: hidden;
+  position: fixed;
+  background: #0a1a0f;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  touch-action: none;
+}
+
+/* ── PANTALLAS ── */
+.pantalla {
+  display: none;
+  width: 100%; height: 100%;
+  position: absolute; top: 0; left: 0;
+}
+.pantalla.activa { display: flex; align-items: center; justify-content: center; }
+
+/* ── INICIO ── */
+#pantalla-inicio { background: linear-gradient(160deg,#0d2b1a,#1a4a2e,#0a3d1f); }
+.inicio-contenido {
+  text-align: center; color: #fff;
+  padding: clamp(16px,4vw,32px) clamp(18px,5vw,28px);
+  background: rgba(0,0,0,0.5);
+  border-radius: 20px;
+  border: 2px solid #4caf50;
+  max-width: 420px; width: 88%;
+  max-height: 95vh;
+  overflow-y: auto;
+}
+.inicio-contenido h1 {
+  font-size: clamp(1.2rem,4.5vw,2.2rem);
+  color:#7dff7d; text-shadow:0 0 20px #00ff44; margin-bottom:4px;
+}
+.inicio-contenido h2 {
+  font-size: clamp(0.75rem,2.5vw,1rem);
+  color:#a5d6a7; margin-bottom:14px;
+}
+.instrucciones {
+  background:rgba(255,255,255,0.07); border-radius:10px;
+  padding: clamp(8px,2vw,14px) clamp(10px,2.5vw,18px);
+  margin-bottom: clamp(12px,3vw,20px);
+}
+.instrucciones p {
+  margin:5px 0;
+  font-size: clamp(0.7rem,2.2vw,0.88rem);
+  color:#c8e6c9;
+}
+
+/* ── LOGOS PANTALLA INICIO ── */
+.inicio-logos {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(10px,3vw,20px);
+  margin-bottom: clamp(8px,2vw,12px);
+  padding: clamp(6px,1.5vw,10px) 10px;
+  background: rgba(255,255,255,0.95);
+  border-radius: 10px;
+}
+.logo-inst {
+  height: clamp(34px,6vw,52px);
+  width: auto;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+.inicio-produccion {
+  font-size: clamp(0.62rem,1.8vw,0.78rem);
+  color: #c8e6c9;
+  line-height: 1.55;
+  margin-bottom: clamp(8px,2vw,14px);
+  padding: 8px 10px;
+  background: rgba(255,255,255,0.06);
+  border-radius: 8px;
+  border-left: 3px solid #4caf50;
+  text-align: left;
+}
+.inicio-produccion strong { color: #7dff7d; }
+
+/* ── BARRA LOGOS EN JUEGO ── */
+#logo-bar {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: clamp(62px,10vh,82px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+  padding: 5px clamp(8px,2vw,16px);
+  background: rgba(255,255,255,0.97);
+  border-bottom: 1px solid rgba(76,175,80,0.5);
+  z-index: 12;
+}
+.logo-barra {
+  height: clamp(46px,8vh,68px);
+  width: auto;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+#colegio-info {
+  flex: 1;
+  text-align: center;
+  padding: 0 4px;
+  display: flex;
+  flex-direction: column;
+  gap: 0px;
+  overflow: hidden;
+  min-width: 0;
+}
+#nombre-juego {
+  font-size: clamp(0.54rem,1.4vw,0.72rem);
+  color: #1b5e20;
+  font-weight: bold;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+#nombre-colegio {
+  font-size: clamp(0.4rem,1vw,0.54rem);
+  color: #388e3c;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+/* EAFIT es landscape, necesita más altura para verse bien */
+#logo-eafit {
+  height: clamp(56px,9.5vh,76px);
+}
+#logo-eafit-inicio {
+  height: clamp(44px,8vw,68px);
+}
+
+/* ── TICKER PRODUCCIÓN ── */
+#ticker {
+  position: absolute;
+  top: clamp(62px,10vh,82px);
+  left: 0; right: 0;
+  height: 20px;
+  background: rgba(27,94,32,0.92);
+  overflow: hidden;
+  z-index: 11;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid rgba(76,175,80,0.4);
+}
+#ticker-text {
+  white-space: nowrap;
+  font-size: 0.65rem;
+  color: #c8e6c9;
+  padding-left: 100%;
+  animation: ticker-scroll 35s linear infinite;
+  letter-spacing: 0.3px;
+}
+@keyframes ticker-scroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-100%); }
+}
+
+/* ── JUEGO ── */
+#pantalla-juego { background:#000; flex-direction:column; }
+#pantalla-juego.activa { display:flex; }
+
+#hud {
+  position:absolute;
+  top: calc(clamp(62px,10vh,82px) + 20px);
+  left:0; right:0;
+  display:flex; justify-content:space-between; align-items:center;
+  padding: clamp(3px,0.8vw,5px) clamp(10px,3vw,16px);
+  background:rgba(0,0,0,0.6);
+  z-index:10;
+  height: clamp(28px,4.5vh,40px);
+}
+#vidas  { font-size:clamp(0.85rem,3vw,1.4rem); letter-spacing:2px; }
+#puntos { font-size:clamp(0.8rem,2.8vw,1.2rem); color:#7dff7d; font-weight:bold; }
+
+#canvas { width:100%; height:100%; display:block; }
+
+#mensaje-enemigo {
+  position:absolute;
+  bottom: clamp(90px,14vh,120px);
+  left:50%; transform:translateX(-50%);
+  background:rgba(0,0,0,0.78); color:#fff;
+  padding:7px 16px; border-radius:20px;
+  font-size:clamp(0.68rem,2vw,0.88rem);
+  pointer-events:none; opacity:0;
+  transition:opacity 0.4s; z-index:10;
+  text-align:center; max-width:88%;
+  white-space: normal;
+}
+
+/* ── PANEL PREGUNTA ── */
+#panel-pregunta {
+  position:absolute; top:50%; left:50%;
+  transform:translate(-50%,-50%);
+  background:rgba(10,30,15,0.97);
+  border:2px solid #4caf50; border-radius:16px;
+  padding: clamp(16px,3vw,24px) clamp(18px,4vw,28px);
+  text-align:center; z-index:20;
+  width:88%; max-width:400px;
+  box-shadow:0 0 30px rgba(0,200,60,0.3);
+}
+#panel-pregunta p {
+  color:#e8f5e9;
+  font-size:clamp(0.82rem,2.8vw,1.05rem);
+  margin-bottom:14px; line-height:1.5;
+}
+.botones-pregunta {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+.btn-opcion {
+  padding: clamp(8px,1.8vw,12px) clamp(8px,2vw,16px);
+  font-size: clamp(0.72rem,2.3vw,0.92rem);
+  border: 2px solid rgba(100,200,120,0.4);
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: bold;
+  background: rgba(30,80,40,0.85);
+  color: #e8f5e9;
+  text-align: left;
+  line-height: 1.4;
+  transition: background 0.2s, transform 0.1s;
+  min-height: clamp(44px,7vh,60px);
+}
+.btn-opcion:hover:not(:disabled) {
+  background: rgba(56,142,60,0.9);
+  border-color: #7dff7d;
+}
+.btn-opcion:active:not(:disabled) {
+  transform: scale(0.96);
+}
+.btn-opcion:disabled {
+  cursor: default;
+  opacity: 0.85;
+}
+.oculto { display:none !important; }
+
+/* ── CONTROLES MÓVIL ── */
+#controles-movil {
+  position:absolute;
+  bottom:0; left:0; right:0;
+  height: clamp(80px,12vh,100px);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding: 0 clamp(14px,4vw,24px) clamp(6px,1.5vh,12px);
+  z-index:15;
+  background: linear-gradient(to top, rgba(0,0,0,0.5), transparent);
+  pointer-events:none;
+}
+.btn-movil {
+  pointer-events:all;
+  width:  clamp(58px,10vw,78px);
+  height: clamp(58px,10vw,78px);
+  font-size: clamp(1.3rem,3.5vw,1.8rem);
+  background:rgba(0,0,0,0.5);
+  color:#fff;
+  border:2.5px solid rgba(255,255,255,0.4);
+  border-radius:50%;
+  cursor:pointer;
+  touch-action:manipulation;
+  user-select:none; -webkit-user-select:none;
+  display:flex; align-items:center; justify-content:center;
+  -webkit-touch-callout:none;
+}
+.btn-movil:active, .btn-movil.on {
+  background:rgba(76,175,80,0.65);
+  transform:scale(0.9);
+  border-color:#7dff7d;
+}
+.btn-jump {
+  width:  clamp(68px,12vw,88px);
+  height: clamp(68px,12vw,88px);
+  font-size: clamp(1.5rem,4vw,2rem);
+  background:rgba(20,80,40,0.6);
+  border-color:rgba(100,255,120,0.55);
+}
+
+/* ── PANTALLAS PEQUEÑAS (phones ~390px) ── */
+@media screen and (max-width: 430px) {
+  .inicio-contenido {
+    padding: 14px 16px;
+    max-height: 90vh;
+  }
+  .inicio-contenido h1 { font-size: 1.15rem; }
+  .inicio-contenido h2 { font-size: 0.72rem; margin-bottom: 10px; }
+  .instrucciones p     { font-size: 0.68rem; margin: 3px 0; }
+
+  #panel-pregunta {
+    width: 94%;
+    padding: 14px 12px;
+  }
+  #panel-pregunta p { font-size: 0.78rem; margin-bottom: 10px; }
+  .botones-pregunta { gap: 8px; }
+  .btn-opcion {
+    font-size: 0.7rem;
+    padding: 8px 6px;
+    min-height: 42px;
+  }
+
+  #controles-movil { height: clamp(72px,13vh,88px); }
+  .btn-movil { width: 56px; height: 56px; font-size: 1.25rem; }
+  .btn-jump  { width: 64px; height: 64px; font-size: 1.5rem; }
+}
+
+/* ── LANDSCAPE MÓVIL (altura reducida) ── */
+@media screen and (max-height: 450px) {
+  .inicio-contenido h1 { font-size: 1rem; margin-bottom: 2px; }
+  .inicio-contenido h2 { font-size: 0.66rem; margin-bottom: 6px; }
+  .instrucciones       { padding: 5px 10px; margin-bottom: 8px; }
+  .instrucciones p     { margin: 2px 0; font-size: 0.64rem; }
+
+  #logo-bar { height: 48px; }
+  .logo-barra { height: 36px; }
+  #logo-eafit { height: 42px; }
+  #ticker { top: 48px; height: 16px; }
+  #ticker-text { font-size: 0.56rem; }
+  #hud { top: 64px; height: 26px; padding: 2px 12px; }
+  #vidas  { font-size: 0.75rem; }
+  #puntos { font-size: 0.75rem; }
+
+  #panel-pregunta { padding: 10px 12px; }
+  #panel-pregunta p { font-size: 0.72rem; margin-bottom: 8px; }
+  .btn-opcion { font-size: 0.68rem; min-height: 36px; padding: 6px; }
+
+  #controles-movil { height: 62px; padding-bottom: 4px; }
+  .btn-movil { width: 50px; height: 50px; font-size: 1.1rem; }
+  .btn-jump  { width: 58px; height: 58px; font-size: 1.3rem; }
+  #mensaje-enemigo { bottom: 68px; font-size: 0.62rem; }
+}
+
+/* ── PORTRAIT MODE — sugerencia de rotar ── */
+#girar-pantalla {
+  display: none;
+  position: fixed; inset: 0;
+  background: rgba(10,26,15,0.97);
+  z-index: 9999;
+  flex-direction: column;
+  align-items: center; justify-content: center;
+  color: #fff; text-align: center;
+  padding: 24px;
+}
+#girar-pantalla .icono-rotar {
+  font-size: clamp(3rem,15vw,5rem);
+  animation: rotar-anim 1.8s ease-in-out infinite;
+  margin-bottom: 16px;
+}
+#girar-pantalla p {
+  font-size: clamp(0.9rem,4vw,1.2rem);
+  color: #a5d6a7; margin: 4px 0;
+}
+#girar-pantalla small {
+  font-size: clamp(0.7rem,3vw,0.85rem);
+  color: #666; margin-top: 12px; display: block;
+}
+#btn-ignorar-rotar {
+  margin-top: 20px;
+  background: transparent;
+  border: 1px solid #4caf50;
+  color: #a5d6a7;
+  font-size: 0.8rem;
+  padding: 8px 20px;
+  letter-spacing: 0;
+}
+@keyframes rotar-anim {
+  0%,100% { transform: rotate(0deg); }
+  40%      { transform: rotate(90deg); }
+  60%      { transform: rotate(90deg); }
+}
+@media screen and (orientation: portrait) and (max-width: 600px) {
+  #girar-pantalla { display: flex; }
+}
+
+/* ── BOTÓN GENERAL ── */
+button {
+  padding: clamp(10px,2.5vw,13px) clamp(24px,5vw,36px);
+  font-size: clamp(0.88rem,2.8vw,1.05rem);
+  background:#2e7d32; color:#fff; border:none;
+  border-radius:12px; cursor:pointer; font-weight:bold; letter-spacing:1px;
+}
+button:active { background:#388e3c; transform:scale(0.97); }
+
+/* ── PANTALLAS FINALES ── */
+#pantalla-victoria { background:linear-gradient(135deg,#1b5e20,#2e7d32); }
+#pantalla-derrota  { background:linear-gradient(135deg,#1a0000,#4a0000); }
+.fin-contenido {
+  text-align:center; color:#fff;
+  padding: clamp(20px,4vw,36px) clamp(18px,4vw,28px);
+  background:rgba(0,0,0,0.5); border-radius:20px;
+  max-width:460px; width:88%;
+  max-height:95vh; overflow-y:auto;
+}
+.fin-contenido h1 { font-size:clamp(1.5rem,5vw,2.6rem); margin-bottom:14px; }
+.dato {
+  font-size:clamp(0.75rem,2.5vw,0.95rem);
+  color:#c8e6c9; margin-bottom:20px; line-height:1.6; font-style:italic;
+}
